@@ -7,7 +7,14 @@
     "sections": [
       {
         "title": "Current points",
-        "sql": "select * from member_balances where id=$1"
+        "sql": "select * from member_balances where id=$1",
+        "columns": [
+          "number",
+          "name",
+          "status",
+          "available_points",
+          "expired_points"
+        ]
       },
       {
         "title": "Point lots",
@@ -27,7 +34,17 @@
     "sections": [
       {
         "title": "Review and fulfilment record",
-        "sql": "select * from reward_queue where id=$1"
+        "sql": "select * from reward_queue where id=$1",
+        "columns": [
+          "reference",
+          "name",
+          "reward",
+          "points",
+          "status",
+          "requested_by",
+          "approved_by",
+          "due_on"
+        ]
       },
       {
         "title": "Evidence",

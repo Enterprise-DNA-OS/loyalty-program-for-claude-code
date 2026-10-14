@@ -159,8 +159,8 @@ function format(value){
  if(!value.length){console.log('(none)');return;}
  const keys=Object.keys(value[0]);const cell=v=>typeof v==='object'&&v!==null?JSON.stringify(v):String(v??'');
  const widths=keys.map(k=>Math.min(50,Math.max(k.length,...value.map(r=>cell(r[k]).length))));
- console.log(keys.map((k,i)=>k.padEnd(widths[i])).join(' | '));console.log(widths.map(n=>'-'.repeat(n)).join('-+-'));
- for(const row of value)console.log(keys.map((k,i)=>cell(row[k]).replace(/\n/g,' ').slice(0,50).padEnd(widths[i])).join(' | '));
+ console.log(keys.map((k,i)=>k.padEnd(widths[i])).join('  '));console.log(widths.map(n=>'-'.repeat(n)).join('  '));
+ for(const row of value)console.log(keys.map((k,i)=>cell(row[k]).replace(/\n/g,' ').slice(0,50).padEnd(widths[i])).join('  '));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  let db;try{const argv=process.argv.slice(2),o={},args=[];let cmd=argv.shift()||'help';if(cmd==='--help')cmd='help';for(const a of argv){if(a.startsWith('--')){const i=a.indexOf('=');o[i<0?a.slice(2):a.slice(2,i)]=i<0?true:a.slice(i+1);}else args.push(a);}db=await getDb();const result=await run(db,cmd,o,args);if(o.json)console.log(JSON.stringify(result,null,2));else format(result);}catch(e){console.error(e.message);process.exitCode=1;}finally{if(db)await db.close();}
