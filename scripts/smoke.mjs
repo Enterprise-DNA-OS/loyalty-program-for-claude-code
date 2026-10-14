@@ -49,6 +49,10 @@ try{
  await call('redeem',{member:m,reward:'Workshop place',reference:'R2',due:plus(2),actor});
  await call('cancel-reward',{reference:'R2',actor,evidence:'Member withdrew'});
  assert.equal((await call('show',{member:m})).balance[0].available_points,950);
+ await db.query("update lots set expires_on=current_date-1 where reference='DEMO-001'");
+ assert.equal((await call('show',{member:m})).balance[0].available_points,250,'Cancellation must not revive an expired lot');
+ await db.query("update lots set expires_on=current_date where reference='DEMO-001'");
+ assert.equal((await call('show',{member:m})).balance[0].available_points,950,'Expiry date remains spendable through that day');
  await call('review-member',{member:m,actor,basis:'Current member service','review-due':plus(365)});
  await call('review-member',{member:'HR003',actor,basis:'Member service','review-due':plus(365),promotions:'false'});
  await assert.rejects(()=>call('review-member',{member:'HR003',actor,basis:'Member service','review-due':plus(365),promotions:'true'}),/evidence/);
