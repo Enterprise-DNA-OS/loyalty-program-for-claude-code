@@ -1,0 +1,1 @@
+These are fictional Salesforce Data Loader-shaped examples, not customer exports. Standard field names follow the Salesforce Loyalty Management Developer Guide. CustomSegment__c illustrates retention of extra columns. The source balance remains evidence and does not issue points.

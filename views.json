@@ -1,13 +1,40 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Loyalty Program for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Weekly loyalty review",
+    "subtitle": "Fictional demo until real records are imported",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Points and activity",
+        "sql": "select * from member_balances order by number"
+      },
+      {
+        "title": "Rewards awaiting work",
+        "sql": "select * from reward_queue where status in ('requested','approved') order by due_on"
+      }
+    ]
+  },
+  {
+    "name": "expiry",
+    "title": "Point expiry and member tiers",
+    "sections": [
+      {
+        "title": "Next 30 days",
+        "sql": "select * from expiring_points order by expires_on"
+      },
+      {
+        "title": "Rolling 365-day tier suggestions",
+        "sql": "select number,name,qualifying_points,suggested_tier from tier_review order by number"
+      }
+    ]
+  },
+  {
+    "name": "controls",
+    "title": "Member record checks",
+    "sections": [
+      {
+        "title": "Review required",
+        "sql": "select * from compliance_checks order by number,rule"
       }
     ]
   }

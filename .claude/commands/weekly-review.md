@@ -1,0 +1,9 @@
+---
+description: Weekly review for the loyalty programme.
+---
+
+Read CLAUDE.md. Run `npm run loyalty -- weekly-review`. Replace example references, dates and actor names with the operator's facts. Never guess missing values. Use --json for structured answers.
+
+Read the relevant member and history first. Ambiguous names list candidates and stop. Present the records, date and next action in plain words. A missing result is not permission to invent it.
+
+Read balances, attention and tier-review. Explain expiring points, overdue rewards, retention gaps and suggested tiers. Tier changes are proposals, not automatic benefit changes.

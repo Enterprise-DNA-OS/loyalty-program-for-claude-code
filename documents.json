@@ -1,11 +1,38 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "member-statement",
+    "title": "DRAFT member points statement",
+    "for_each": "select id,number from members order by number",
+    "file": "number",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Current points",
+        "sql": "select * from member_balances where id=$1"
+      },
+      {
+        "title": "Point lots",
+        "sql": "select reference,points,remaining,earned_on,expires_on from lot_balances where member_id=$1 order by expires_on"
+      },
+      {
+        "title": "Reward requests",
+        "sql": "select reference,points,status,due_on from redemptions where member_id=$1 order by due_on"
+      }
+    ]
+  },
+  {
+    "name": "reward-authorisation",
+    "title": "DRAFT reward authorisation",
+    "for_each": "select id,reference from redemptions",
+    "file": "reference",
+    "sections": [
+      {
+        "title": "Review and fulfilment record",
+        "sql": "select * from reward_queue where id=$1"
+      },
+      {
+        "title": "Evidence",
+        "sql": "select evidence,created_at,updated_at from redemptions where id=$1"
+      }
     ]
   }
 ]

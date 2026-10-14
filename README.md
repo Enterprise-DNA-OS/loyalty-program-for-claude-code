@@ -1,115 +1,123 @@
-<h1 align="center">Loyalty Program for Claude Code</h1>
+# Loyalty Program for Claude Code
 
-<p align="center">
-  <strong>The open-source loyalty program that is just a database and Claude Code.</strong>
-</p>
+Keep member points, expiry dates and reward approvals in a database you own.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free MIT software. Install and try the fictional demo. | Your programme rules, imported records, reports and agreed connections. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Salesforce Loyalty Management data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/salesforce-loyalty-management?utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management">How it works</a></td>
-  </tr>
-</table>
+[Get your version built](https://enterprisedna.co/omni/book?offer=replace-software&utm_medium=readme&utm_campaign=salesforce-loyalty-management) · [Instead of Salesforce Loyalty Management](https://enterprisedna.co/omni/instead-of/salesforce-loyalty-management)
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-salesforce-loyalty-management">Instead of Salesforce Loyalty Management</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+## Start here
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Loyalty Program for Claude Code does the job you pay Salesforce Loyalty Management for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Salesforce Loyalty Management dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Salesforce Loyalty Management per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
-
-## Quick start
-
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or later. The local demo needs no database server.
 
 ```bash
-git clone https://github.com/Enterprise-DNA-OS/loyalty-program-for-claude-code.git
-cd loyalty-program-for-claude-code
 npm install
 npm run demo
+npm run loyalty -- weekly-review
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+Open the folder in Claude Code, Codex, OpenCode or Cursor. AGENTS.md points to CLAUDE.md and the same command recipes. PGlite keeps local records in .data/db. DATABASE_URL selects PostgreSQL. Shared deployments need controlled access and backups. Do not seed real data with the demo.
 
-### Use it with your own Postgres or Supabase
+The fictional Harbour Rewards programme includes an overdue reward, expired points, points about to expire, dormant members and missing privacy evidence. Dates are relative to the first seed. Repeating seed preserves records.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## Weekly rituals
 
-## The commands
+Review /expiring, /dormant, /redemptions, /tier-review and /compliance each week. /weekly-review combines balances, attention and tiers. /draft-statement produces member paperwork. /draft-review prepares the management review. Nothing sends.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+31 CLI commands and 35 slash-command recipes. Every CLI command accepts --json. References accept case-insensitive names, member numbers or UUID prefixes. Ambiguous names list candidates and exit 1. Mutations require --actor. Use --dry-run for transactional previews.
 
-| Command | What it does |
-|---|---|
-| `/...` | ... |
+- /programs: `programs`
+- /members: `members`
+- /balances: `balances`
+- /expiring: `expiring`
+- /dormant: `dormant`
+- /tier-review: `tier-review`
+- /rewards: `rewards`
+- /redemptions: `redemptions`
+- /compliance: `compliance`
+- /followups: `followups`
+- /activity: `activity`
+- /attention: `attention`
+- /help: `help`
+- /source-history: `source-history --member=SF001`
+- /show: `show --member=HR001`
+- /weekly-review: `weekly-review`
+- /add-program: `add-program --name="Our Rewards" --terms="Approved programme terms reference" --actor="Operator"`
+- /add-member: `add-member --program="Harbour Rewards" --number=NEW001 --name="Member name" --review-due=YYYY-MM-DD --basis="Membership administration" --actor="Operator"`
+- /add-reward: `add-reward --program="Harbour Rewards" --name="Workshop" --points=500 --actor="Operator"`
+- /earn: `earn --member=HR001 --points=100 --expires=YYYY-MM-DD --reference="Unique receipt reference" --evidence="Approved accrual evidence" --actor="Operator"`
+- /redeem: `redeem --member=HR001 --reward="Workshop place" --reference="Unique reward reference" --due=YYYY-MM-DD --actor="Operator"`
+- /approve-reward: `approve-reward --reference="Reward reference" --evidence="Reviewed request" --actor="Independent reviewer"`
+- /complete-reward: `complete-reward --reference="Reward reference" --evidence="Fulfilment record" --actor="Operator"`
+- /cancel-reward: `cancel-reward --reference="Reward reference" --evidence="Cancellation reason" --actor="Operator"`
+- /review-member: `review-member --member=HR001 --review-due=YYYY-MM-DD --basis="Retention purpose" --actor="Operator"`
+- /log: `log --member=HR001 --note="Follow-up required" --due=YYYY-MM-DD --actor="Operator"`
+- /resolve: `resolve --reference="Follow-up UUID" --evidence="Resolution reference" --actor="Operator"`
+- /import: `import salesforce-loyalty-management --file=imports/LoyaltyProgramMember.csv --program="Harbour Rewards" --source-program="Salesforce programme ID" --history-dir=imports --actor="Operator" --dry-run`
+- /export: `export --out=exports/records.json`
+- /draft-statement: `draft-statement --member=HR001`
+- /draft-review: `draft-review`
 
-## Instead of salesforce-loyalty-management
+/docs, /view, /customise and /new-view cover paperwork, read-only reports and tested changes.
 
-<!-- TODO(author): how to bring data across from Salesforce Loyalty Management; link docs/replace-salesforce-loyalty-management.md -->
+## Point and reward rules
 
-## Architecture
+Each earning is a dated lot with a unique reference and evidence. Points remain spendable through their expiry date in UTC. Requests consume the earliest-expiring available lots and reserve points immediately. A different actor approves the request. Completion records external fulfilment, it does not deliver a reward. Cancelling a pending request releases its allocation; an expired lot stays expired. Completed rewards cannot be cancelled by this CLI. Corrections require an agreed, tested migration and retained evidence.
 
+Tiers are suggestions based on points earned in the last 365 days, excluding the boundary day. Redemption does not reduce qualifying points. The demo thresholds are Member 0, Silver 1000 and Gold 3000. They are example business rules, not Salesforce rules. /customise changes them through a migration. There is one whole-number, non-cash point unit per programme, no payment processing or gift-card balances.
+
+## Ten questions answered today
+
+These examples are supported by this build. They are not claims that Salesforce cannot answer them.
+
+1. Which members have points expiring in the next 30 days? Run `expiring`.
+2. Which inactive shoppers still hold spendable points? Run `dormant`.
+3. Which reward requests are overdue? Run `attention`.
+4. What can each member spend after pending rewards are reserved? Run `balances`.
+5. Which members need a retention review? Run `compliance`.
+6. Which promotion permissions lack supporting evidence? Run `compliance`.
+7. Which tiers do rolling annual points suggest? Run `tier-review`.
+8. Who recorded or approved a reward change? Run `activity`.
+9. Which follow-ups remain open? Run `followups`.
+10. What belongs in the Monday loyalty review? Run `weekly-review`.
+
+## Bring your records
+
+```bash
+npm run loyalty -- import salesforce-loyalty-management --file=imports/LoyaltyProgramMember.csv --program="Harbour Rewards" --source-program="Your Salesforce programme ID" --history-dir=imports --actor="Your name" --dry-run
 ```
-loyalty-program-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+Remove --dry-run after reviewing the result. Members come across, including extra source columns. Optional LoyaltyMemberCurrency, LoyaltyLedger and TransactionJournal exports are retained as source evidence. They do not create spendable balances. Reconcile remaining lots, expiries and existing reward commitments before operational cutover. [Exact mapping and export steps](docs/replace-salesforce-loyalty-management.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents and controls
 
-## Contributing
+Edit brand.json for your business name, logo and colours. npm run docs produces member statements and reward authorisation sheets. npm run view renders the week, expiry and controls reports. Open the HTML locally or print reviewed documents to PDF.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+/compliance flags retention reviews, promotion permission evidence and missing programme terms. [Official sources and exact scope](docs/compliance.md). No legal certification, sends, member portal, checkout connector or live Salesforce connection is included. [What a front end adds](docs/why-no-front-end.md).
 
-## Want it installed and run for you?
+Actor names are not authenticated identities and database owners can edit history. Shared operation needs restricted database credentials, backups and an approval procedure. RLS is enabled with no public policies; use a trusted database owner for the CLI, never expose it as an anonymous endpoint.
 
-Enterprise DNA installs Loyalty Program for Claude Code for your business, migrates your Salesforce Loyalty Management data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+## Your first hour: ten things to ask for
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management)
-- Read more: [enterprisedna.co/omni/instead-of/salesforce-loyalty-management](https://enterprisedna.co/omni/instead-of/salesforce-loyalty-management?utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management)
+1. Put our name and logo on the statement.
+2. Preview our member export.
+3. Preserve the original point history for reconciliation.
+4. Show points due to expire this month.
+5. Find overdue reward requests.
+6. Record a reviewed point earning with its expiry.
+7. Draft a member statement for review.
+8. Explain which promotion permissions lack evidence.
+9. Set our tier thresholds with a tested migration.
+10. Add our retention-review policy and a new report.
 
-## License
+## Price and verification
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+Salesforce publishes Starter at US$20,000 per organisation per month, billed annually, equivalent to US$240,000 a year. This is a public USD list price, not an observed NZ or AU customer invoice. [Vendor pricing](https://www.salesforce.com/marketing/loyalty/pricing/), checked 14 October 2026. [Selection evidence](docs/research.md).
+
+npm test creates isolated data, exercises all 31 commands, checks point arithmetic, expiry, approval states, import rollback and idempotency, history preservation, full exports, escaped HTML and rendering. CI runs Node 20/22 on Windows and Linux plus PostgreSQL 17. An explicit TEST_DATABASE_URL must be an empty disposable database.
+
+MIT. Not affiliated with Salesforce or Anthropic. Hosting and coding-agent usage have separate costs. Enterprise DNA installs, adapts and operates your version through Omni by Enterprise DNA for one setup fee, then a retainer. [Book 30 minutes with Sam](https://enterprisedna.co/omni/book?offer=replace-software&utm_medium=readme&utm_campaign=salesforce-loyalty-management).

@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Which members have points expiring in the next 30 days?",
+    "command": "expiring"
+  },
+  {
+    "question": "Which inactive shoppers still hold spendable points?",
+    "command": "dormant"
+  },
+  {
+    "question": "Which reward requests are overdue?",
+    "command": "attention"
+  },
+  {
+    "question": "What can each member spend after pending rewards are reserved?",
+    "command": "balances"
+  },
+  {
+    "question": "Which members need a retention review?",
+    "command": "compliance"
+  },
+  {
+    "question": "Which promotion permissions lack supporting evidence?",
+    "command": "compliance"
+  },
+  {
+    "question": "Which tiers do rolling annual points suggest?",
+    "command": "tier-review"
+  },
+  {
+    "question": "Who recorded or approved a reward change?",
+    "command": "activity"
+  },
+  {
+    "question": "Which follow-ups remain open?",
+    "command": "followups"
+  },
+  {
+    "question": "What belongs in the Monday loyalty review?",
+    "command": "weekly-review"
+  }
+]

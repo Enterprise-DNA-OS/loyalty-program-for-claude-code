@@ -1,0 +1,2 @@
+Id,ProgramId,MembershipNumber,Contact.Name,MemberStatus,EnrollmentDate,LastActivityDate,CanReceivePromotions,CustomSegment__c
+0lMdemo001,0lPdemo001,SF001,"Morgan, Jamie",Active,2026-01-01,2026-02-01,false,Wholesale
