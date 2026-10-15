@@ -6,7 +6,7 @@ Keep member points, expiry dates and reward approvals in a database you own.
 |---|---|---|
 | Free MIT software. Install and try the fictional demo. | Your programme rules, imported records, reports and agreed connections. | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Get your version built](https://enterprisedna.co/omni/book?offer=replace-software&utm_medium=readme&utm_campaign=salesforce-loyalty-management) · [Instead of Salesforce Loyalty Management](https://enterprisedna.co/omni/instead-of/salesforce-loyalty-management)
+[Get your version built](https://enterprisedna.co/omni/book?offer=replace-software&utm_medium=readme&utm_campaign=salesforce-loyalty-management) · [Instead of Salesforce Loyalty Management](https://enterprisedna.co/omni/instead-of/salesforce-loyalty-management?utm_source=github&utm_medium=readme&utm_campaign=salesforce-loyalty-management)
 
 ## Start here
 
